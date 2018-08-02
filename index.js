@@ -7,19 +7,33 @@ function formatName(user) {
 }
 
 function getGreeting(user) {
+  let element;
+
   if (user) {
-    return (
-    <h1>
-      Hello, {formatName(user)}!
-    </h1>
+    element = (
+      <div>
+        <h1 className="title">
+          Hello, {formatName(user)}!
+        </h1>
+        <h2>
+          Good to see you!
+        </h2>
+      </div>
     );
   } else {
-    return (
-    <h1>
-      Hello, stranger.
-    </h1>
+    element = (
+      <div>
+        <h1 className="title"
+          >Hello, stranger.
+        </h1>
+        <h2>
+          Nice to meet you!
+        </h2>
+      </div>
     );
   }
+
+  return element;
 }
 
 const user = {
@@ -28,7 +42,7 @@ const user = {
 }
 
 ReactDOM.render(
-    getGreeting(user),
-    //getGreeting(null),
+    //getGreeting(user),
+    getGreeting(null),
     document.getElementById('root')
 );
