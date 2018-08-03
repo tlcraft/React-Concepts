@@ -36,6 +36,20 @@ function getGreeting(user) {
   return element;
 }
 
+function tick() {
+  const clock = (
+      <div>
+        <h2>It is {new Date().toLocaleTimeString()}.</h2>
+      </div>
+  );
+  ReactDOM.render(
+    clock,
+    document.getElementById('root')
+  );
+}
+
+setInterval(tick, 1000);
+
 const user = {
   firstName: 'John',
   lastName: 'Doe'
