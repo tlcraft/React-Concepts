@@ -6,8 +6,9 @@ function formatName(user) {
   return user.firstName + ' ' + user.lastName;
 }
 
-function getGreeting(user) {
+function Welcome(props) {
   let element;
+  const user = props.user;
 
   if (user) {
     element = (
@@ -47,8 +48,7 @@ function tick() {
     document.getElementById('root')
   );
 }
-
-setInterval(tick, 1000);
+//setInterval(tick, 1000);
 
 const user = {
   firstName: 'John',
@@ -56,7 +56,7 @@ const user = {
 }
 
 ReactDOM.render(
-    //getGreeting(user),
-    getGreeting(null),
+    <Welcome user={user} />,
+    //<Welcome user={null} />,
     document.getElementById('root')
 );
