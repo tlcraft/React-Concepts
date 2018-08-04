@@ -37,26 +37,39 @@ function Welcome(props) {
   return element;
 }
 
-function tick() {
+function Tick(props) {
   const clock = (
       <div>
-        <h2>It is {new Date().toLocaleTimeString()}.</h2>
+        <h2>It is {props.time}.</h2>
       </div>
   );
-  ReactDOM.render(
-    clock,
-    document.getElementById('root')
+  return clock;
+}
+
+function tick() {
+  return (
+    <Tick time={new Date().toLocaleTimeString()} />
   );
 }
-//setInterval(tick, 1000);
+// TODO update clock state correctly
+setInterval(tick, 1000);
 
 const user = {
   firstName: 'John',
   lastName: 'Doe'
 }
 
+function App() {
+  return (
+    <div>
+      <Welcome user={user} />
+      <Welcome user={null} />
+      <Tick time={new Date().toLocaleTimeString()}/>
+    </div>
+  );
+}
+
 ReactDOM.render(
-    <Welcome user={user} />,
-    //<Welcome user={null} />,
+    <App />,
     document.getElementById('root')
 );
