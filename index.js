@@ -38,24 +38,40 @@ function Welcome(props) {
 }
 
 class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      id: 'clock'
+    };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
   render() {
     const clock = (
-        <div id={this.props.id}>
-          <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+        <div id={this.state.id}>
+          <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
         </div>
     );
     return clock;
   }
 }
-
-function tick() {
-  ReactDOM.render(
-    <Clock id='clock' date={new Date()} />,
-    document.getElementById('clock')
-  );
-}
-
-setInterval(tick, 1000);
 
 const user = {
   firstName: 'John',
@@ -67,7 +83,7 @@ function App() {
     <div>
       <Welcome user={user} />
       <Welcome user={null} />
-      <Clock id='clock' date={new Date()}/>
+      <Clock />
     </div>
   );
 }
