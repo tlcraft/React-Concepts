@@ -37,13 +37,15 @@ function Welcome(props) {
   return element;
 }
 
-function Clock(props) {
-  const clock = (
-      <div id={props.id}>
-        <h2>It is {props.date.toLocaleTimeString()}.</h2>
-      </div>
-  );
-  return clock;
+class Clock extends React.Component {
+  render() {
+    const clock = (
+        <div id={this.props.id}>
+          <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+        </div>
+    );
+    return clock;
+  }
 }
 
 function tick() {
