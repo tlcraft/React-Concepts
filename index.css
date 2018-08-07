@@ -5,3 +5,12 @@ body {
 .title {
     color: navy;
 }
+
+.on {
+    background-color: white;
+}
+
+.off {
+    background-color: black;
+    color: white;
+}
