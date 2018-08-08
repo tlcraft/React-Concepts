@@ -102,18 +102,10 @@ class Toggle extends React.Component {
   }
 }
 
-function LoginButton(props) {
+function AccountButton(props) {
   return (
     <button onClick={props.onClick}>
-      Login
-    </button>
-  );
-}
-
-function LogoutButton(props) {
-  return (
-    <button onClick={props.onClick}>
-      Logout
+      {props.title}
     </button>
   );
 }
@@ -139,9 +131,9 @@ class LoginControl extends React.Component {
     let button;
 
     if (isLoggedIn) {
-      button = <LogoutButton onClick={this.handleLogoutClick} />;
+      button = <AccountButton onClick={this.handleLogoutClick} title='Logout' />;
     } else {
-      button = <LoginButton onClick={this.handleLoginClick} />;
+      button = <AccountButton onClick={this.handleLoginClick} title='Login' />;
     }
 
     return (
