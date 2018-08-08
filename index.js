@@ -6,13 +6,9 @@ function formatName(user) {
   return user.firstName + ' ' + user.lastName;
 }
 
-function Welcome(props) {
-  let element;
-  const user = props.user;
-
-  if (user) {
-    element = (
-      <div>
+function UserGreeting(props) {
+  return (
+    <div>
         <h1 className="title">
           Hello, {formatName(user)}!
         </h1>
@@ -20,10 +16,12 @@ function Welcome(props) {
           Good to see you!
         </h2>
       </div>
-    );
-  } else {
-    element = (
-      <div>
+  );
+}
+
+function GuestGreeting(props) {
+  return (
+    <div>
         <h1 className="title"
           >Hello, stranger.
         </h1>
@@ -31,10 +29,17 @@ function Welcome(props) {
           Nice to meet you!
         </h2>
       </div>
-    );
-  }
+  );
+}
 
-  return element;
+function Welcome(props) {
+  const user = props.user;
+
+  if (user) {
+    return <UserGreeting user={user} />
+  } else {
+    return <GuestGreeting />
+  }
 }
 
 class Clock extends React.Component {
