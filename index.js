@@ -30,7 +30,7 @@ function GuestGreeting(props) {
         </h2>
         {new Date().getHours() > 17 &&
           <div>
-            <a href="#">Create an account!</a>
+            <a href="#">Special deals!</a>
           </div>
         }
     </div>
@@ -74,9 +74,14 @@ class Clock extends React.Component {
   }
 
   render() {
+    const month = this.state.date.getMonth();
     const clock = (
         <div id={this.state.id}>
           <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+          {month > 5 && month < 9 ?
+            <p>Enjoy summer!</p> :
+            <p>Summer will be back</p>
+          }
         </div>
     );
     return clock;
