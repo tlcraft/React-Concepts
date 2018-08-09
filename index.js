@@ -88,6 +88,19 @@ class Clock extends React.Component {
   }
 }
 
+function WarningBanner(props) {
+  // returning null will hide a component but lifecycle events will still fire
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
@@ -105,9 +118,12 @@ class Toggle extends React.Component {
 
   render() {
     return (
-      <button className={this.state.isToggleOn ? "on" : "off"} onClick={this.handleClick}>
-        {this.state.isToggleOn ? "ON" : "OFF"}
-      </button>
+      <div>
+        <button className={this.state.isToggleOn ? "on" : "off"} onClick={this.handleClick}>
+          {this.state.isToggleOn ? "ON" : "OFF"}
+        </button>  
+        <WarningBanner warn={!this.state.isToggleOn} />
+      </div>    
     );
   }
 }
