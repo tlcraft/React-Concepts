@@ -28,7 +28,12 @@ function GuestGreeting(props) {
         <h2>
           Nice to meet you!
         </h2>
-      </div>
+        {new Date().getHours() > 17 &&
+          <div>
+            <a href="#">Create an account!</a>
+          </div>
+        }
+    </div>
   );
 }
 
