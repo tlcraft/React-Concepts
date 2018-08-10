@@ -175,12 +175,16 @@ const user = {
   lastName: 'Doe'
 }
 const numbers = [1, 2, 3, 4, 5];
+
+function ListItem(props){
+  return <li>{props.value}</li>
+}
+
 function NumberList(props) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) => 
-    <li key={number.toString()}>
-      {number*2}
-    </li>
+    <ListItem key={number.toString()}
+              value={number*2} />
   );
 
   return (
