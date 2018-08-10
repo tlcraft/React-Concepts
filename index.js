@@ -180,6 +180,8 @@ function ListItem(props){
   return <li>{props.value}</li>
 }
 
+// Component elements should have keys, not HTML elements
+// Note: A good rule of thumb is that elements inside the map() call need keys.
 function NumberList(props) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) => 
