@@ -174,9 +174,15 @@ const user = {
   firstName: 'John',
   lastName: 'Doe'
 }
-
 const numbers = [1, 2, 3, 4, 5];
-const listItems = numbers.map((number) => <li>{number*2}</li>);
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) => <li>{number*2}</li>);
+
+  return (
+    <ul>{listItems}</ul>
+  );
+}
 
 function App() {
   return (
@@ -187,7 +193,7 @@ function App() {
       <Clock />
       <Toggle />
       <LoginControl />
-      <ul>{listItems}</ul>
+      <NumberList numbers={numbers}/>
     </div>
   );
 }
