@@ -175,6 +175,9 @@ const user = {
   lastName: 'Doe'
 }
 
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) => <li>{number*2}</li>);
+
 function App() {
   return (
     <div>
@@ -184,6 +187,7 @@ function App() {
       <Clock />
       <Toggle />
       <LoginControl />
+      <ul>{listItems}</ul>
     </div>
   );
 }
