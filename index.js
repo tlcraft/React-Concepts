@@ -184,13 +184,14 @@ function ListItem(props){
 // Note: A good rule of thumb is that elements inside the map() call need keys.
 function NumberList(props) {
   const numbers = props.numbers;
-  const listItems = numbers.map((number) => 
-    <ListItem key={number.toString()}
-              value={number*2} />
-  );
 
   return (
-    <ul>{listItems}</ul>
+    <ul>
+      {numbers.map((number) => 
+        <ListItem key={number.toString()}
+                  value={number*2} />
+      )}
+    </ul>
   );
 }
 
