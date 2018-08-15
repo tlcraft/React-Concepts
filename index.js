@@ -170,6 +170,38 @@ class LoginControl extends React.Component {
   }
 }
 
+class EssayForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      value: 'Please describe your favorite movie.'
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A description was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form className='movieForm' onSubmit={this.handleSubmit}>
+        <label>
+          Movie Description:
+          <textarea value={this.state.value} onChange={this.handleChange} />
+        </label>
+      </form>
+    );
+  }  
+}
+
 class NameForm extends React.Component {
   constructor(props){
     super(props);
@@ -241,6 +273,7 @@ function App() {
       <LoginControl />
       <NumberList numbers={numbers}/>
       <NameForm />
+      <EssayForm />
     </div>
   );
 }
