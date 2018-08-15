@@ -186,6 +186,8 @@ class ReservationForm extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
+    // Here is an example of ES6 computed property name syntax.
+    // This is shorthand for creating and merging a partial state.
     this.setState({
       [name]: value
     });
