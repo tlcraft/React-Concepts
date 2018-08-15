@@ -185,7 +185,7 @@ class NameForm extends React.Component {
 
   handleSubmit(event){
     alert('A name was submitted: ' + this.state.value);
-    user.firstName = this.state.value;
+
     event.preventDefault();
   }
 
@@ -198,7 +198,7 @@ class NameForm extends React.Component {
         </label>
         <input type="submit" value="submit" />
         <div>
-          {user.firstName}
+          {this.state.value}
         </div>
       </form>
     );
