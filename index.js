@@ -170,6 +170,42 @@ class LoginControl extends React.Component {
   }
 }
 
+class GenreForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'action'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('Your favorite genre is: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Pick your favorite genre:
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="action">Action</option>
+            <option value="platformer">Platformer</option>
+            <option value="racing">Racing</option>
+            <option value="rpg">Role-playing Game</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
 class EssayForm extends React.Component {
   constructor(props){
     super(props);
@@ -274,6 +310,7 @@ function App() {
       <NumberList numbers={numbers}/>
       <NameForm />
       <EssayForm />
+      <GenreForm />
     </div>
   );
 }
