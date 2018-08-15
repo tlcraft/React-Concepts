@@ -311,6 +311,7 @@ function App() {
       <NameForm />
       <EssayForm />
       <GenreForm />
+      <input type="file" />
     </div>
   );
 }
