@@ -346,6 +346,16 @@ function NumberList(props) {
   );
 }
 
+// Lifting the state up example
+function BoilingVerdict(props) {
+  if (props.celsius >= 100) {
+    return <p>The water would boil.</p>;
+  }
+  return <p>The water would not boil.</p>;
+}
+
+
+
 function App() {
   return (
     <div>
@@ -361,6 +371,8 @@ function App() {
       <GenreForm />
       <input type="file" />
       <ReservationForm />
+      <BoilingVerdict celsius="102" />
+      <BoilingVerdict celsius="98" />
     </div>
   );
 }
