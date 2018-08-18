@@ -439,6 +439,27 @@ class Calculator extends React.Component {
   }
 }
 
+// Composition over Inheritance
+function FancyBorder(props) {
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color}>
+      {props.children}
+    </div>
+  );
+}
+
+function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+       Welcome
+      </h1>
+      <p className="Dialog-mesage">
+        Thank you for visiting our spacecraft!
+      </p>
+    </FancyBorder>
+  );
+}
 
 function App() {
   return (
@@ -458,6 +479,7 @@ function App() {
       <BoilingVerdict celsius="102" />
       <BoilingVerdict celsius="98" />
       <Calculator />
+      <WelcomeDialog />
     </div>
   );
 }
