@@ -461,6 +461,19 @@ function WelcomeDialog() {
   );
 }
 
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   return (
     <div>
@@ -476,8 +489,13 @@ function App() {
       <GenreForm />
       <input type="file" />
       <ReservationForm />
-      <BoilingVerdict celsius="102" />
-      <BoilingVerdict celsius="98" />
+      <SplitPane 
+        left={
+          <BoilingVerdict celsius="102" />
+        }
+        right={
+          <BoilingVerdict celsius="98" /> 
+        } />      
       <Calculator />
       <WelcomeDialog />
     </div>
