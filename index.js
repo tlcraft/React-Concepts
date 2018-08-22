@@ -457,6 +457,7 @@ function Dialog(props) {
       <p className="Dialog-mesage">
         {props.message}
       </p>
+      {props.children}
     </FancyBorder>
   );
 }
@@ -467,6 +468,36 @@ function WelcomeDialog() {
       title="Welcome"
       message="Thank you for visiting our spacecraft!" />
   );
+}
+
+class SignUpDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
+    this.state = { login: '' };
+  }
+
+  handleChange(e) {
+    this.setState({login: e.target.value});
+  }
+
+  handleSignUp() {
+    alert(`Welcome to the tutorial, ${this.state.login}!`);
+  }
+
+  render() {
+    return (
+      <Dialog title="React Tutorial Program"
+              message="How should we refer to you?">
+        <input value={this.state.login}
+               onChange={this.handleChange} />
+        <button onClick={this.handleSignUp}>
+          Sign Me Up!
+        </button>
+      </Dialog>
+    );
+  }
 }
 
 function SplitPane(props) {
@@ -509,6 +540,7 @@ function App() {
       <Dialog
         title="Hello World!"
         message="This is just a React tutorial playground." />
+      <SignUpDialog />
     </div>
   );
 }
