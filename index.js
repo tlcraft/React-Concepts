@@ -513,6 +513,77 @@ function SplitPane(props) {
   );
 }
 
+/*
+ * Thinking In React
+ * https://reactjs.org/docs/thinking-in-react.html
+ */
+
+class FilterableProductTable extends React.Component {
+  render() {
+    return (
+      <div>
+        <SearchBar />
+        <ProductTable />
+      </div>
+    );
+  }
+}
+
+class SearchBar extends React.Component {
+  render() {
+    return (
+      <div>
+        <input type='text'></input>
+        <input type='radio'></input>
+      </div>
+    );
+  }
+}
+
+class ProductTable extends React.Component {
+  render() {
+    return (
+      <table>
+        <tbody>
+          <ProductCategoryRow category='Electronics' />
+          <ProductRow product={{stocked: true, price: '$1.00', name: 'Laptop' }}/>
+          </tbody>
+      </table>
+    );
+  }
+}
+
+class ProductCategoryRow extends React.Component {
+  render() {
+    const category = this.props.category;
+    return (
+      <tr>
+        <th colSpan="2">
+          {category}
+        </th>
+      </tr>
+    );
+  }
+}
+
+class ProductRow extends React.Component {
+  render() {
+    const product = this.props.product;
+    const name = product.stocked ? 
+      product.name :
+      <span style={{color: 'red'}}>
+        {product.name}
+      </span>
+
+    return (
+      <tr>
+        <td>{name}</td>
+        <td>{product.price}</td>
+      </tr>
+    );
+  }
+}
+
 function App() {
   return (
     <div>
@@ -541,6 +612,8 @@ function App() {
         title="Hello World!"
         message="This is just a React tutorial playground." />
       <SignUpDialog />
+      <hr/>
+      <FilterableProductTable />
     </div>
   );
 }
