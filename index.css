@@ -61,3 +61,18 @@ body {
     width: 50%;
     height: 100%;
 }
+
+/*
+    Filterable Product Table
+*/
+
+.filterableProductTable {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid;
+}
+
+.productCategoryRow.header {
+    color: green;
+    font-style: bold;
+}

@@ -513,6 +513,94 @@ function SplitPane(props) {
   );
 }
 
+/*
+ * Thinking In React
+ * https://reactjs.org/docs/thinking-in-react.html
+ */
+
+class FilterableProductTable extends React.Component {
+  render() {
+    return (
+      <div className='filterableProductTable'>
+        <SearchBar />
+        <ProductTable />
+      </div>
+    );
+  }
+}
+
+class SearchBar extends React.Component {
+  render() {
+    return (
+      <div>
+        <div>
+          <input type='text' name='desc' placeholder='Search for an item...'></input>
+        </div>
+        <div>        
+          <input type='checkbox' id='inStock' name='inStock'></input>
+          <label htmlFor='inStock'>Include only in stock items.</label>
+        </div>
+      </div>
+    );
+  }
+}
+
+class ProductTable extends React.Component {
+  render() {
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <th>
+              Description
+            </th>
+            <th>
+              Price
+            </th>
+          </tr>
+          <ProductCategoryRow category='Electronics' className='productCategoryRow' />
+          <ProductRow product={{stocked: true, price: '$999.00', name: 'Laptop' }}/>
+          <ProductRow product={{stocked: true, price: '$35.00', name: 'Raspberry Pi' }}/>
+          <ProductCategoryRow category='Grocery' />
+          <ProductRow product={{stocked: true, price: '$2.00', name: 'Milk' }}/>
+          <ProductRow product={{stocked: true, price: '$3.00', name: 'Hamburger' }}/>
+          </tbody>
+      </table>
+    );
+  }
+}
+
+class ProductCategoryRow extends React.Component {
+  render() {
+    const category = this.props.category;
+    return (
+      <tr>
+        <th colSpan='2' className='productCategoryRow header'>
+          {category}
+        </th>
+      </tr>
+    );
+  }
+}
+
+class ProductRow extends React.Component {
+  render() {
+    const product = this.props.product;
+    const name = product.stocked ? 
+      product.name :
+      <span style={{color: 'red'}}>
+        {product.name}
+      </span>
+
+    return (
+      <tr>
+        <td>{name}</td>
+        <td>{product.price}</td>
+      </tr>
+    );
+  }
+}
+
 function App() {
   return (
     <div>
@@ -541,6 +629,8 @@ function App() {
         title="Hello World!"
         message="This is just a React tutorial playground." />
       <SignUpDialog />
+      <hr/>
+      <FilterableProductTable />
     </div>
   );
 }
