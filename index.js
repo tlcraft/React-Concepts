@@ -521,7 +521,7 @@ function SplitPane(props) {
 class FilterableProductTable extends React.Component {
   render() {
     return (
-      <div>
+      <div className='filterableProductTable'>
         <SearchBar />
         <ProductTable />
       </div>
@@ -533,8 +533,13 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        <input type='text'></input>
-        <input type='radio'></input>
+        <div>
+          <input type='text' name='desc' placeholder='Search for an item...'></input>
+        </div>
+        <div>        
+          <input type='checkbox' id='inStock' name='inStock'></input>
+          <label htmlFor='inStock'>Include only in stock items.</label>
+        </div>
       </div>
     );
   }
@@ -545,8 +550,20 @@ class ProductTable extends React.Component {
     return (
       <table>
         <tbody>
-          <ProductCategoryRow category='Electronics' />
-          <ProductRow product={{stocked: true, price: '$1.00', name: 'Laptop' }}/>
+          <tr>
+            <th>
+              Description
+            </th>
+            <th>
+              Price
+            </th>
+          </tr>
+          <ProductCategoryRow category='Electronics' className='productCategoryRow' />
+          <ProductRow product={{stocked: true, price: '$999.00', name: 'Laptop' }}/>
+          <ProductRow product={{stocked: true, price: '$35.00', name: 'Raspberry Pi' }}/>
+          <ProductCategoryRow category='Grocery' />
+          <ProductRow product={{stocked: true, price: '$2.00', name: 'Milk' }}/>
+          <ProductRow product={{stocked: true, price: '$3.00', name: 'Hamburger' }}/>
           </tbody>
       </table>
     );
@@ -558,7 +575,7 @@ class ProductCategoryRow extends React.Component {
     const category = this.props.category;
     return (
       <tr>
-        <th colSpan="2">
+        <th colSpan='2' className='productCategoryRow header'>
           {category}
         </th>
       </tr>
