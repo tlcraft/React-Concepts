@@ -518,12 +518,21 @@ function SplitPane(props) {
  * https://reactjs.org/docs/thinking-in-react.html
  */
 
+const PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];
+
 class FilterableProductTable extends React.Component {
   render() {
     return (
       <div className='filterableProductTable'>
         <SearchBar />
-        <ProductTable />
+        <ProductTable products={this.props.products} />
       </div>
     );
   }
@@ -532,7 +541,7 @@ class FilterableProductTable extends React.Component {
 class SearchBar extends React.Component {
   render() {
     return (
-      <div>
+      <form>
         <div>
           <input type='text' name='desc' placeholder='Search for an item...'></input>
         </div>
@@ -540,31 +549,46 @@ class SearchBar extends React.Component {
           <input type='checkbox' id='inStock' name='inStock'></input>
           <label htmlFor='inStock'>Include only in stock items.</label>
         </div>
-      </div>
+      </form>
     );
   }
 }
 
 class ProductTable extends React.Component {
   render() {
+    const rows = [];
+    let lastCategory = null;
+
+    this.props.products.forEach((product) => {
+      if (product.category !== lastCategory) {
+        rows.push(
+          <ProductCategoryRow
+            category={product.category}
+            key={product.category} />
+        );
+      }
+
+      rows.push(
+        <ProductRow
+          product={product}
+          key={product.name} />
+      );
+
+      lastCategory = product.category;
+
+    });
+
     return (
       <table>
-        <tbody>
+        <thead>
           <tr>
-            <th>
-              Description
-            </th>
-            <th>
-              Price
-            </th>
+            <th>Description</th>
+            <th>Price</th>
           </tr>
-          <ProductCategoryRow category='Electronics' className='productCategoryRow' />
-          <ProductRow product={{stocked: true, price: '$999.00', name: 'Laptop' }}/>
-          <ProductRow product={{stocked: true, price: '$35.00', name: 'Raspberry Pi' }}/>
-          <ProductCategoryRow category='Grocery' />
-          <ProductRow product={{stocked: true, price: '$2.00', name: 'Milk' }}/>
-          <ProductRow product={{stocked: true, price: '$3.00', name: 'Hamburger' }}/>
-          </tbody>
+        </thead>
+        <tbody>
+          {rows}
+        </tbody>
       </table>
     );
   }
@@ -630,7 +654,7 @@ function App() {
         message="This is just a React tutorial playground." />
       <SignUpDialog />
       <hr/>
-      <FilterableProductTable />
+      <FilterableProductTable products={PRODUCTS}/>
     </div>
   );
 }
