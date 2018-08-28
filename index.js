@@ -528,11 +528,25 @@ const PRODUCTS = [
 ];
 
 class FilterableProductTable extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      filterText: 'ball',
+      inStockOnly: false
+    };    
+  }
+
   render() {
     return (
       <div className='filterableProductTable'>
-        <SearchBar />
-        <ProductTable products={this.props.products} />
+        <SearchBar 
+          filterText={this.state.filterText} 
+          inStockOnly={this.state.inStockOnly} />
+        <ProductTable 
+          products={this.props.products} 
+          filterText={this.state.filterText}
+          inStockOnly={this.state.inStockOnly}
+          />
       </div>
     );
   }
@@ -540,13 +554,16 @@ class FilterableProductTable extends React.Component {
 
 class SearchBar extends React.Component {
   render() {
+    const filterText = this.props.fitlerText;
+    const inStockOnly = this.props.inStockOnly;
+
     return (
       <form>
         <div>
-          <input type='text' name='desc' placeholder='Search for an item...'></input>
+          <input type='text' name='desc' placeholder='Search for an item...' value={filterText} />
         </div>
         <div>        
-          <input type='checkbox' id='inStock' name='inStock'></input>
+          <input type='checkbox' id='inStock' name='inStock' checked={inStockOnly} />
           <label htmlFor='inStock'>Include only in stock items.</label>
         </div>
       </form>
@@ -556,10 +573,21 @@ class SearchBar extends React.Component {
 
 class ProductTable extends React.Component {
   render() {
+    const filterText = this.props.filterText;
+    const inStockOnly = this.props.inStockOnly;
+
     const rows = [];
     let lastCategory = null;
 
     this.props.products.forEach((product) => {
+      if (product.name.indexOf(filterText) === -1) {
+        return;
+      }
+
+      if (inStockOnly && !product.stocked) {
+        return;
+      }
+
       if (product.category !== lastCategory) {
         rows.push(
           <ProductCategoryRow
