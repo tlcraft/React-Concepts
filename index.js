@@ -531,9 +531,20 @@ class FilterableProductTable extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      filterText: 'ball',
+      filterText: '',
       inStockOnly: false
     };    
+
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.handleInStockChange = this.handleInStockChange.bind(this);
+  }
+
+  handleFilterTextChange(filterText) {
+    this.setState({filterText: filterText});
+  }
+
+  handleInStockChange(inStockOnly) {
+    this.setState({inStockOnly: inStockOnly})
   }
 
   render() {
@@ -541,7 +552,9 @@ class FilterableProductTable extends React.Component {
       <div className='filterableProductTable'>
         <SearchBar 
           filterText={this.state.filterText} 
-          inStockOnly={this.state.inStockOnly} />
+          inStockOnly={this.state.inStockOnly} 
+          onFilterTextChange={this.handleFilterTextChange} 
+          onInStockChange={this.handleInStockChange}/>
         <ProductTable 
           products={this.props.products} 
           filterText={this.state.filterText}
@@ -553,17 +566,38 @@ class FilterableProductTable extends React.Component {
 }
 
 class SearchBar extends React.Component {
-  render() {
-    const filterText = this.props.fitlerText;
-    const inStockOnly = this.props.inStockOnly;
+  constructor(props) {
+    super(props);
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.handleInStockChange = this.handleInStockChange.bind(this);
+  }
 
+  handleFilterTextChange(e) {
+    this.props.onFilterTextChange(e.target.value);
+  }
+
+  handleInStockChange(e) {
+    this.props.onInStockChange(e.target.checked);
+  }
+
+  render() {
     return (
       <form>
         <div>
-          <input type='text' name='desc' placeholder='Search for an item...' value={filterText} />
+          <input 
+            type='text'
+            name='desc'
+            placeholder='Search for an item...' 
+            value={this.props.filterText} 
+            onChange={this.handleFilterTextChange}/>
         </div>
         <div>        
-          <input type='checkbox' id='inStock' name='inStock' checked={inStockOnly} />
+          <input 
+            type='checkbox' 
+            id='inStock' 
+            name='inStock' 
+            checked={this.props.inStockOnly}
+            onChange={this.handleInStockChange} />
           <label htmlFor='inStock'>Include only in stock items.</label>
         </div>
       </form>
